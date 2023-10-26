@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PijankaApp</title>
+    <script src="lib/index.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+</head>
+
+<body onload="">
+    <div class="cont">
+        <div class="row">
+            <div class="div">
+                <button onclick="addSong()">Додај нову песму</button>
+                <input onkeyup="updateTextarea()" id="txt" type="text">
+                <ul id="list"></ul>
+            </div>
+
+            <div class="div">
+                <button onclick="getEventID()">
+                    <h1>Започни пијанку</h1>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
