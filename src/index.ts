@@ -1,7 +1,6 @@
-
-
 let _txtarea = ""
-import { _URL } from "./common"
+let _URL = "http://192.168.88.34:5000"
+//http://localhost:5000/api/songs
 
 async function addSong() {
     if (_txtarea != "") {

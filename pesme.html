@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="pesme.css">
 </head>
 
-<body onload="onPage1Load()">
+<body onload="onPage1Load();initSocket()">
     <div class="cont">
         <div class="row">
-            <label id="txtlbl" for="txtCont">Последње наручена</label>
-            <div id="txtCont"></div>
+            <label id="txtlbl" for="input">Последње наручена</label>
+            <h1 id="input"></h1>
             <input id="hidden" type="hidden" value="">
             <label id="nextlbl" for="next">Потенцијално следећа</label>
             <div id="next"></div>
@@ -36,6 +36,18 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script>
+        function initSocket() {
+            let txtCont = document.getElementById("input")
+            var socket = io();
+            socket.on('last ordered', function (msg) {
+                console.log("msg", msg)
+                txtCont.innerHTML = msg;
+            });
+            socket.emit('last ordered', _eventID);
+        }
+    </script>
 </body>
 
 </html>

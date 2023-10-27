@@ -1,4 +1,5 @@
-import { _URL } from "./common"
+let _pesmeURL = "http://192.168.88.34:5000"
+//http://localhost:5000/api/songs
 
 let _eventID: string
 
@@ -15,7 +16,6 @@ async function onPage1Load() {
     }
     await startRePagination()
     await startLisPagination()
-    lastOrdered()
 }
 async function setEventID() {
     let url: string = window.location.href
@@ -32,7 +32,7 @@ async function setEventID() {
     //4. cokvek otvori url, na front u onload ispituje se da li ima ?id=folderName. Ako ima uzmes folderName i saljes na server dalje
 }
 async function checkID(): Promise<boolean> {
-    let response = await fetch(_URL + "/api/checkID/" + _eventID, {
+    let response = await fetch(_pesmeURL + "/api/checkID/" + _eventID, {
         method: 'GET',
     })
     let validID = await response.json() as boolean
@@ -40,7 +40,7 @@ async function checkID(): Promise<boolean> {
 }
 
 async function getEventSongs(): Promise<Song[]> {
-    let response = await fetch(_URL + "/api/event/songs/" + _eventID, {
+    let response = await fetch(_pesmeURL + "/api/event/songs/" + _eventID, {
         method: 'GET',
     })
     let json = await response.json()
@@ -114,7 +114,6 @@ function paginate(items: Song[], itemsPerPage: number, itemsCont: HTMLDivElement
             pagination.appendChild(link);
         }
     }
-
     showItems(currentPage);
     setupPagination();
 }
@@ -154,27 +153,28 @@ async function getRandomSong() {
 }
 
 async function orderThisSong() {
-    let txtCont = document.getElementById("txtCont")
+    let txtCont = document.getElementById("input")
     let next = document.getElementById("next")
     let hidden = <HTMLInputElement>document.getElementById("hidden")
 
     let songID = hidden.value
 
-    await fetch(_URL + "/api/event/songs/" + _eventID + "/" + songID, {
+    await fetch(_pesmeURL + "/api/event/songs/" + _eventID + "/" + songID, {
         method: 'GET',
     })
     if (txtCont == null || next == null) {
         return
     }
     txtCont.innerText = next.innerText
+
     next.innerText = ""
 
     startRePagination()
     startLisPagination()
-
 }
+
 async function getListened(): Promise<Song[]> {
-    let response = await fetch(_URL + "/api/event/listened/" + _eventID, {
+    let response = await fetch(_pesmeURL + "/api/event/listened/" + _eventID, {
         method: 'GET',
     })
     let json = await response.json()
@@ -182,26 +182,3 @@ async function getListened(): Promise<Song[]> {
     let listened: Song[] = json as Song[]
     return listened
 }
-
-async function lastOrdered() {
-    let txtCont = <HTMLDivElement>document.getElementById("txtCont")
-
-    let response = await fetch(_URL + "/api/event/last/" + _eventID, {
-        method: 'GET',
-    })
-
-    let json = await response.json()
-
-    let lastOrderedSong: Song = json as Song
-
-    if (lastOrderedSong.name != txtCont.innerHTML) {
-        startRePagination()
-        startLisPagination()
-    }
-
-    if (txtCont != null) {
-        txtCont.innerHTML = lastOrderedSong.name
-    }
-}
-
-setInterval(lastOrdered, 1000)
