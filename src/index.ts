@@ -1,5 +1,5 @@
 let _txtarea = ""
-let _URL = "http://192.168.88.34:5000"
+let _URL = "http://192.168.1.9:5000"
 //http://localhost:5000/api/songs
 
 async function addSong() {
@@ -62,4 +62,5 @@ async function getEventID() {
     let eventID = await json.id as string
 
     window.location.href = _URL + "/pesme.html?id=" + eventID
+    console.log(eventID)
 }

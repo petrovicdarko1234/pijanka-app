@@ -1,4 +1,4 @@
-let _pesmeURL = "http://192.168.88.34:5000"
+let _pesmeURL = "http://192.168.1.9:5000"
 //http://localhost:5000/api/songs
 
 let _eventID: string
@@ -21,8 +21,10 @@ async function setEventID() {
     let url: string = window.location.href
     let urlParts: string[] = url.split("?id=")
     if (urlParts.length == 2) {
+        console.log(urlParts[1])
         _eventID = urlParts[1]
     } else {
+        console.log(urlParts[1])
         window.location.href = "/"
     }
     //flow

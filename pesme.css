@@ -71,9 +71,13 @@
 }
 
 #btnCont {
-    background-color: blue;
     margin-bottom: 20px;
     margin-top: 5px;
+}
+
+.skipbtn {
+    background-color: #53b60c;
+    color: #091301;
 }
 
 .ul {
@@ -87,7 +91,7 @@
 }
 
 .pagination a:hover:not(.active) {
-    background-color: #ddd;
+    background-color: #091301;
 }
 
 ul {
@@ -105,6 +109,8 @@ li {
 
 li:hover {
     background-color: #091301;
+    color: white;
+
 }
 
 .pagination-container {
@@ -121,12 +127,12 @@ li:hover {
 }
 
 .pagination a {
-    color: black;
+    color: white;
     padding: 8px 16px;
     text-decoration: none;
     border: 1px solid #ddd;
     border-right: none;
-    background-color: #f1f1f1;
+    background-color: #102202;
     transition: background-color 0.3s ease-in-out;
 }
 
@@ -148,5 +154,5 @@ li:hover {
 }
 
 .pagination a:hover:not(.active) {
-    background-color: #ddd;
+    background-color: #091301;
 }

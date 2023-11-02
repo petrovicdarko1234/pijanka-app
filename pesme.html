@@ -18,8 +18,8 @@
             <label id="nextlbl" for="next">Потенцијално следећа</label>
             <div id="next"></div>
             <div id="btnCont">
-                <button onclick=" getRandomSong()" id="skipbtn">Изабери насумице</button>
-                <button onclick="orderThisSong()" id="nextbtn">Наручи следећу</button>
+                <button class="skipbtn" onclick=" getRandomSong()" id="skipbtn">Изабери насумице</button>
+                <button class="skipbtn" onclick="orderThisSong()" id="nextbtn">Наручи следећу</button>
             </div>
             <div id="item">
                 преостале
@@ -42,8 +42,11 @@
             let txtCont = document.getElementById("input")
             var socket = io();
             socket.on('last ordered', function (msg) {
-                console.log("msg", msg)
+                startRePagination()
+                startLisPagination()
+                console.log("msg: ", msg)
                 txtCont.innerHTML = msg;
+
             });
             socket.emit('last ordered', _eventID);
         }
